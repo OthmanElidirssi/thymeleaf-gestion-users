@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        table {
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div th:switch="${users}" class="container">
+    <h2 th:case="null" class="alert alert-info">No users yet!</h2>
+    <div th:case="*">
+        <h2 class="mb-4">Users</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <a th:href="@{/edit/{id}(id=${user.id})}" class="btn btn-warning btn-sm">Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p>
+            <a href="/signup" class="btn btn-primary">Add a new user</a>
+        </p>
+    </div>
+</div>
+
+
+
+</body>
+</html>
